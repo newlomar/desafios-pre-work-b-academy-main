@@ -10,7 +10,7 @@ const link = document.querySelector("[data-js='link']")
 
 link.addEventListener('click', (event) => {
 
-  link.textContent = [...app.classList].includes('hide') ? 'Limpar' : 'Mostrar'
+  link.textContent = [...app.classList].includes('hide') ? 'Limpar' : 'Mostrar conteúdo'
   app.classList.toggle('hide')
 
 }, false);
