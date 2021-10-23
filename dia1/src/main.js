@@ -6,10 +6,11 @@ app.innerHTML = `
   <h1>B. Academy</h1>
   <p>Boas vindas à semana de pré-work para o Bootcamp em React.js 😁</p>`
 
-const link = document.querySelector("[data-js='link']")
+const link = document.querySelector('[data-js="link"]')
 
 link.addEventListener('click', (event) => {
 
+  event.preventDefault()
   link.textContent = [...app.classList].includes('hide') ? 'Limpar' : 'Mostrar conteúdo'
   app.classList.toggle('hide')
 
