@@ -7,6 +7,7 @@ function calculadora (callback) {
   }
 }
 
+
 const sum = calculadora((a, b) => a + b)
 const sub = calculadora((a, b) => a - b)
 const mult = calculadora((a, b) => a * b)
