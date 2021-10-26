@@ -1,5 +1,6 @@
 import './style.css'
 
+/* Exercicio 1 */
 const form = document.querySelector('[data-js="form"]')
 const input = document.querySelector('[data-js="input"]')
 
@@ -23,6 +24,8 @@ input.addEventListener('input', (e) => {
 
 })
 
+
+/* Exercico 2 */
 const select = document.createElement('select')
 select.multiple = true
 
@@ -85,3 +88,7 @@ const divDasCores = document.createElement('div')
 divDasCores.style.display = 'flex'
 divDasCores.style.flexWrap = 'wrap'
 select.insertAdjacentElement('afterend', divDasCores)
+
+
+/* Exercicio 3 */
+
