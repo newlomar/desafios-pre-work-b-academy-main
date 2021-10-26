@@ -68,7 +68,7 @@ select.addEventListener('click', (e) => {
 
     quadrado.style.height = '100px'
     quadrado.style.width = '100px'
-    quadrado.style.background = `${item.value}`
+    quadrado.style.background = `${item}`
 
     divDasCores.insertAdjacentElement('beforeend', quadrado)
   })
@@ -79,4 +79,5 @@ form.insertAdjacentElement('beforeend', select)
 
 const divDasCores = document.createElement('div')
 divDasCores.style.display = 'flex'
+divDasCores.style.flexWrap = 'wrap'
 select.insertAdjacentElement('afterend', divDasCores)
