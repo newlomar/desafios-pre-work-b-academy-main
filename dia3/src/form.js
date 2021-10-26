@@ -60,6 +60,10 @@ const options = colors.map((cor) => {
 
 select.addEventListener('click', (e) => {
 
+  while (divDasCores.firstChild) {
+    divDasCores.removeChild(divDasCores.firstChild)
+  }
+
   const cores = [...select.options].filter(item => item.selected).map(item => item.value)
 
   cores.forEach((item) => {
