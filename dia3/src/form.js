@@ -59,6 +59,24 @@ const options = colors.map((cor) => {
 })
 
 select.addEventListener('click', (e) => {
-  console.log([...select.options].filter(item => item.selected))
+
+  const cores = [...select.options].filter(item => item.selected).map(item => item.value)
+
+  cores.forEach((item) => {
+
+    const quadrado = document.createElement('div')
+
+    quadrado.style.height = '100px'
+    quadrado.style.width = '100px'
+    quadrado.style.background = `${item.value}`
+
+    divDasCores.insertAdjacentElement('beforeend', quadrado)
+  })
+
 })
+
 form.insertAdjacentElement('beforeend', select)
+
+const divDasCores = document.createElement('div')
+divDasCores.style.display = 'flex'
+select.insertAdjacentElement('afterend', divDasCores)
