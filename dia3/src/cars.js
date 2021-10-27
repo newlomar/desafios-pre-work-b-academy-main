@@ -6,6 +6,7 @@ form_carros.addEventListener('submit', (e) => {
   e.preventDefault()
 
   const dados = e.target.elements
+  const inputInicial = document.querySelector('[data-js="input_inicial"]')
 
   const tr = document.createElement('tr')
 
@@ -20,15 +21,24 @@ form_carros.addEventListener('submit', (e) => {
   const tdAno = document.createElement('td')
   tdAno.textContent = dados.ano.value
 
+  const tdPlaca = document.createElement('td')
+  tdPlaca.textContent = dados.placa.value
+
   const tdCor = document.createElement('td')
-  tdCor.textContent = dados.cor.value
+  const colorSquare = document.createElement('div')
+  colorSquare.style.width = '100px'
+  colorSquare.style.height = '100px'
+  colorSquare.style.background = `${dados.cor.value}`
+  tdCor.insertAdjacentElement('afterbegin', colorSquare)
 
 
   tr.insertAdjacentElement('beforeend', tdImg)
   tr.insertAdjacentElement('beforeend', tdMarca)
   tr.insertAdjacentElement('beforeend', tdAno)
+  tr.insertAdjacentElement('beforeend', tdPlaca)
   tr.insertAdjacentElement('beforeend', tdCor)
 
   table.insertAdjacentElement('beforeend', tr)
   form_carros.reset()
+  inputInicial.focus()
 })
