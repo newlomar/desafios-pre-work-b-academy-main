@@ -11,9 +11,10 @@ form_carros.addEventListener('submit', (e) => {
 
   const tdImg = document.createElement('td')
   const img = document.createElement('img')
-  img.attributes.src = `${dados['image_url'].value}`
-  console.log(img.attributes.src)
+  img.src = `${dados['image_url'].value}`
   tdImg.insertAdjacentElement('beforeend', img)
+  img.style.height = '100px'
+  img.style.width = '100px'
 
   const tdMarca = document.createElement('td')
   tdMarca.textContent = `${dados['marca_modelo'].value}`
