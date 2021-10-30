@@ -12,6 +12,7 @@ label, input {
 
 button {
   margin-top: 1rem;
+  text-align: center;
 }
 
 table, th, td {
