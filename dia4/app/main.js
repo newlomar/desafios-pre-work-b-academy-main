@@ -39,11 +39,7 @@ const inserirNaTabela = (data) => {
   const deleteButton = document.createElement('button')
   deleteButton.setAttribute('type', 'submit')
   deleteButton.textContent = 'Excluir'
-  deleteButton.addEventListener('click', (e) => {
-    const linha = e.target.parentElement.parentElement
-    table.removeChild(linha)
-    deletarCarro(linha.children[3].textContent)
-  })
+  deleteButton.addEventListener('click', handleDelete)
   tdDelete.insertAdjacentElement('afterbegin', deleteButton)
 
   tr.insertAdjacentElement('beforeend', tdImg)
@@ -147,6 +143,22 @@ const deletarCarro = (placa) => {
 
   })
   .catch(error => console.log('Erro: ', error))
+
+  const allTrs = table.querySelectorAll('tr').length
+  if (allTrs === 1) {
+    const tr = document.createElement('tr')
+    tr.className = 'lista-vazia'
+    tr.textContent = 'Nenhum carro encontrado.'
+    table.insertAdjacentElement('beforeend', tr)
+  }
+}
+
+const handleDelete = (e) => {
+  const button = e.target
+  const linha = e.target.parentElement.parentElement
+  table.removeChild(linha)
+  deletarCarro(linha.children[3].textContent)
+  button.removeEventListener('click', handleDelete)
 }
 
 form_carros.addEventListener('submit', cadastrarCarro)
