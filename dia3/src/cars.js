@@ -31,7 +31,6 @@ form_carros.addEventListener('submit', (e) => {
   colorSquare.style.background = `${dados.cor.value}`
   tdCor.insertAdjacentElement('afterbegin', colorSquare)
 
-
   tr.insertAdjacentElement('beforeend', tdImg)
   tr.insertAdjacentElement('beforeend', tdMarca)
   tr.insertAdjacentElement('beforeend', tdAno)
