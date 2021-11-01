@@ -2,11 +2,26 @@ import './style.css'
 import { get, post, del } from './http'
 
 const url = 'http://localhost:3333/cars'
-const form = document.querySelector('[data-js="cars-form"]')
-const table = document.querySelector('[data-js="table"]')
+const form = document.querySelector<HTMLFormElement>('[data-js="cars-form"]')!
+const table = document.querySelector('[data-js="table"]')!
 
-const getFormElement = (event) => (elementName) => {
-  return event.target.elements[elementName]
+type getformelement = (event:Event) => (elementName: string) => Element
+
+type dados = {
+  image:string,
+  brandModel: string,
+  year: string,
+  plate: string,
+  color: string
+}
+
+type dadosImg = {
+  src:string,
+  alt:string
+}
+
+const getFormElement:getformelement = (event:Event) => (elementName:string) => {
+  return (event.target as HTMLFormElement).elements[elementName]
 }
 
 const elementTypes = {
@@ -15,7 +30,7 @@ const elementTypes = {
   color: createColor,
 }
 
-function createImage (data) {
+function createImage (data:dadosImg) {
   const td = document.createElement('td')
   const img = document.createElement('img')
   img.src = data.src
@@ -25,13 +40,13 @@ function createImage (data) {
   return td
 }
 
-function createText (value) {
+function createText (value:string) {
   const td = document.createElement('td')
   td.textContent = value
   return td
 }
 
-function createColor (value) {
+function createColor (value:string) {
   const td = document.createElement('td')
   const div = document.createElement('div')
   div.style.width = '100px'
@@ -43,14 +58,14 @@ function createColor (value) {
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault()
+  const image = document.querySelector('[data-js="image"]')
   const getElement = getFormElement(e)
-
   const data = {
-    image: getElement('image').value,
-    brandModel: getElement('brand-model').value,
-    year: getElement('year').value,
-    plate: getElement('plate').value,
-    color: getElement('color').value,
+    image: (<HTMLInputElement>getElement('image')).value,
+    brandModel: (<HTMLInputElement>getElement('brand-model')).value,
+    year: (<HTMLInputElement>getElement('year')).value,
+    plate: (<HTMLInputElement>getElement('plate')).value,
+    color: (<HTMLInputElement>getElement('color')).value,
   }
 
   const result = await post(url, data)
@@ -65,13 +80,13 @@ form.addEventListener('submit', async (e) => {
     table.removeChild(noContent)
   }
 
-  createTableRow(data)
+  createTableRow(data);
 
-  e.target.reset()
-  image.focus()
+  (e.target as HTMLFormElement).reset();
+  (<HTMLInputElement>image).focus()
 })
 
-function createTableRow (data) {
+function createTableRow (data:dados) {
   const elements = [
     { type: 'image', value: { src: data.image, alt: data.brandModel } },
     { type: 'text', value: data.brandModel },
@@ -97,11 +112,12 @@ function createTableRow (data) {
   tr.appendChild(button)
 
   table.appendChild(tr)
+  return
 }
 
-async function handleDelete (e) {
+async function handleDelete (e:Event) {
   const button = e.target
-  const plate = button.dataset.plate
+  const plate = (<HTMLButtonElement>button).dataset.plate
 
   const result = await del(url, { plate })
 
